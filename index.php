@@ -23,7 +23,10 @@
     // 2. Зробіть функцію, яка приймає параметром число від 1 до 7, 
     // а повертає день тижня укр мовою
 
-    // $arr = [
+
+    // function getDayWeek(int $num): ? string
+    // {
+    //     $arr = [
     //     '1' => 'понеділок',
     //     '2' => 'вівторок',
     //     '3' => 'середа',
@@ -31,17 +34,12 @@
     //     '5' => 'п\'ятниця',
     //     '6' => 'субота',
     //     '7' => 'неділя'
-    // ];
+    //     ];
 
-    // function getDayWeek(int $num): ? string
-    // {
-    //     global $arr;
+    //     if (isset($arr[$num]) ?? $arr[$num] >= 0 || $arr[$num] <= 7) {
+    //         return $arr[$num];
+    //     } 
 
-    //     if (isset($arr[$num])) {
-    //         if ($arr[$num] >= 0 || $arr[$num] <= 7) {
-    //             return $arr[$num];
-    //         } 
-    //     }
     // };
 
     // print_r(getDayWeek(2));
@@ -52,10 +50,10 @@
 
     // function getStringUrl(string $str): string
     // {
-    //     return strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $str)));
+    //     return strtolower(trim(str_replace(' ', '-', $str)));
     // };
 
-    // print_r(getStringUrl('Hello world'));
+    // print_r(getStringUrl('Hello world' . '<br>'));
     // print_r(getStringUrl('Hello world world'));
 
     // 4. Написати функцію для отримання підсумкової інформації кошика покупок. 
@@ -67,18 +65,17 @@
     //     ['name' => 'Notebook', 'price' => '600', 'quantity' => 4],
     // ];
 
-    //  function totalProductCount(): int {
-    //     global $products;
+    //  function totalProductCount(array $arr): int {
     //     $productCountQuantity = 0;
     //     $productCountPrice = 0;
 
-    //     if ( isset($products) ) {
-    //         $productCountQuantity = array_sum( array_column( $products, 'quantity'));
-    //         $productCountPrice = array_sum( array_column( $products, 'price' ) );
+    //     if ( isset($arr) ) {
+    //         $productCountQuantity = array_sum( array_column( $arr, 'quantity'));
+    //         $productCountPrice = array_sum( array_column( $arr, 'price' ) );
     //     } 
     //     return $productCountQuantity . $productCountPrice;
     // };
-    // print_r(totalProductCount());
+    // print_r(totalProductCount($products));
 
     //     5. Оголосити три змінні: перше число, друге число та знак. 
     // Реалізувати алгоритм найпростішого калькулятора (додавання, віднімання, множення, поділ). 
@@ -86,34 +83,40 @@
 
     // function calculate(int|float $firstNumber, int|float $secondNumber, string $sign)
     // {
-    //     if ($sign == '+') {
+    //     if ($sign === '+') {
     //         $add = $firstNumber + $secondNumber;
     //         var_dump($add);
     //         return $add;
-    //     } else if ($sign == '-') {
+    //     }
+    //     if ($sign === '-') {
     //         $subs = $firstNumber - $secondNumber;
     //         var_dump($subs);
     //         return $subs;
-    //     } else if ($sign == '*') {
+    //     } 
+    //     if ($sign === '*') {
     //         $mul = $firstNumber * $secondNumber;
     //         var_dump($mul);
     //         return $mul;
-    //     } else if ($sign == '/') {
+    //     } 
+    //     if ($sign === '/') {
+    //         if($secondNumber === 0) {
+    //             return "You cannot divide by 0.";
+    //         }
     //         $div = $firstNumber / $secondNumber;
     //         var_dump($div);
     //         return $div;
-    //     } else if ($sign == '**') {
+    //     } 
+    //     if ($sign === '**') {
     //         $pow = $firstNumber ** $secondNumber;
     //         var_dump($pow);
     //         return $pow;
-    //     } 
-    //     else {
-
-    //         echo "Enter the correct sign";
+    //     } else {
+    //         return "Enter the correct sign.";
     //     }
     // }
 
     // print_r(calculate(1, 5, '/') . '<br>');
+    // print_r(calculate(1, 0, '/') . '<br>');
     // print_r(calculate(14, 4, '-') . '<br>');
     // print_r(calculate(9, 2, '**') . '<br>');
     // print_r(calculate(10, 2, '+') . '<br>');
@@ -139,7 +142,9 @@
     //     $unique = false;
     //     $string = str_replace('.', '', $string);
     //     $array = explode(' ', mb_strtolower($string)); 
-    //     if ($unique) $array = array_unique($array);
+    //     if ($unique) {
+    //         $array = array_unique($array);
+    //     } 
     //     sort($array);
     //     return implode(' ', $array);  
     //   }
@@ -157,9 +162,8 @@
     //     $strLength = strlen($str);
     //     if ($strLength > $maxsymbol) {
     //         return substr($str, 0, $maxsymbol) . '...';
-    //     } else {
-    //         return $str;
-    //     }
+    //     } 
+    //     return $str;
     // }
 
     // print_r(truncateString("Hello world!", 3) . '<br>');
@@ -202,10 +206,8 @@
     // {
     //     if(!empty($value)) {
     //         return $value;
-    //     } else {
-    //         echo "Немає даних";
     //     }
-
+    //     return "Немає даних";
     // }
 
     // print_r(formatEmpty('Hello world') . '<br>');
@@ -250,24 +252,32 @@
     //         'name' => 'asdsada2',
 
     //     ],
+    //     [
+    //         'id' => 3,
+    //         'name' => 'asdsada2',
+
+    //     ],
+    //     [
+    //         'id' => 4,
+    //         'name' => 'asdsada2',
+
+    //     ],
     // ];
 
-    // function findWhere(array $array, string $key, string $value): mixed
+    // function findWhere(array &$array, string $key, string $value): mixed
     // {
-    //     $user = [];
+    //     $users = [];
     //     foreach ($array as $item) {
     //         if (is_array($item) && findWhere($item, $key, $value)) {
     //             return $item;
     //         } 
     //         if (isset($item[$key]) && $item[$key] == $value) {
-    //             array_push($user, $item);
-    //             return $user;
+    //             array_push($users, $item);
     //         }
     //     }
-    //     return false;
+    //     return $users;
     // }
     // print_r(findWhere($users, 'name', 'asdsada2'));
-
 
     // 14. Написати генератор прикладів для учнів молодшої школи. Необхідно вказати  змінні:
     // *необхідну кількість прикладів;
@@ -295,17 +305,16 @@
     //     __ / 3 = 3;
     //     4 __ 2 = 8;
 
-
-    function randomExample()
+    function randomExample(array $operators, int $countExamples, bool $isAnswerRequired, int $min, int $max)
     {
-        $operators = ["+", "-", "*", "/"];
+        $sign = ["__"];
 
-        for ($i = 0; $i < 5; $i++) {
-            $num1 = mt_rand(0, 100);
-            $num2 = mt_rand(0, 100);
+        for ($i = 0; $i < $countExamples; $i++) {
+            $num1 = mt_rand($min, $max);
+            $num2 = mt_rand($min, $max);
 
-            $k = array_rand($operators);
-            switch ($operators[$k]) {
+            $randomOperator = array_rand($operators);
+            switch ($operators[$randomOperator]) {
                 case "+":
                     $result = $num1 + $num2;
                     break;
@@ -313,6 +322,9 @@
                     $result = $num1 * $num2;
                     break;
                 case "/":
+                    if($num2 === 0) {
+                        echo "You cannot divide by 0.";
+                    }
                     $result = $num1 / $num2;
                     break;
                 case "-":
@@ -320,13 +332,17 @@
                     $result = $num1 - $num2;
                     break;
             }
-            echo "$num1 {$operators[$k]} $num2 = $result<br/>\n";
+
+            if ($isAnswerRequired) {
+                echo "$num1 {$operators[$randomOperator]} $num2 = $result<br/>\n";
+            } else {
+                echo "$num1 {$operators[$randomOperator]} $num2 = $sign[0]<br/>\n";;
+            }
         }
     }
 
-
-
-    echo randomExample();
+    print_r(randomExample(["+", "-", "*", "/"], 5, true, 0, 100));
+    print_r(randomExample(["+", "/"], 2, false, 5, 20));
 
 
 
