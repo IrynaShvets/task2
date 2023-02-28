@@ -307,13 +307,12 @@
 
     function randomExample(array $operators, int $countExamples, bool $isAnswerRequired, int $min, int $max)
     {
-        $sign = ["__"];
-
         for ($i = 0; $i < $countExamples; $i++) {
-            $num1 = mt_rand($min, $max);
-            $num2 = mt_rand($min, $max);
+            $num1 = rand($min, $max);
+            $num2 = rand($min, $max);
 
             $randomOperator = array_rand($operators);
+
             switch ($operators[$randomOperator]) {
                 case "+":
                     $result = $num1 + $num2;
@@ -322,9 +321,10 @@
                     $result = $num1 * $num2;
                     break;
                 case "/":
-                    if($num2 === 0) {
-                        echo "You cannot divide by 0.";
-                    }
+                    if ($num2 === 0) {
+                        // echo "You cannot divide by 0.";
+                        break;
+                    } 
                     $result = $num1 / $num2;
                     break;
                 case "-":
@@ -334,9 +334,11 @@
             }
 
             if ($isAnswerRequired) {
-                echo "$num1 {$operators[$randomOperator]} $num2 = $result<br/>\n";
+                if (!empty($result)) {
+                    echo "$num1 {$operators[$randomOperator]} $num2 = $result<br/>\n";
+                }
             } else {
-                echo "$num1 {$operators[$randomOperator]} $num2 = $sign[0]<br/>\n";;
+                echo "$num1 {$operators[$randomOperator]} $num2 = __<br/>\n";;
             }
         }
     }
@@ -344,9 +346,6 @@
     print_r(randomExample(["+", "-", "*", "/"], 5, true, 0, 100));
     print_r(randomExample(["+", "/"], 2, false, 5, 20));
 
-
-
     ?>
 </body>
-
 </html>
